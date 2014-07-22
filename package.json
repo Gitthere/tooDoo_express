@@ -1,0 +1,13 @@
+{
+  "name": "hello-world",
+  "description": "hello world test app",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "body-parser": "^1.4.3",
+    "express": "^4.6.1",
+    "jade": "^1.4.2",
+    "method-override": "^2.1.1",
+    "mongoose": "^3.8.13"
+  }
+}
