@@ -27,10 +27,10 @@ app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
   //res.render('tasks/list.jade');//'/' after jade not necessary.  this will
   //render the list.jade content in layout.jade
   Task.find(function (err, tasks) {
-    var options = {
-      tasksCollection: tasks
+    var options = {//create object for array of objects, array will not work
+      tasksCollection: tasks //set property 
     };
-    console.log(options);
+    //console.log(options);//check if tasks logging
     
     res.render('tasks/list.jade', options);
   });
