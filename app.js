@@ -1,14 +1,21 @@
 var express = require('express');
 var app = express();
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://toodoo_express:toodoo_express@ds027709.mongolab.com:27709/toodoo_express');
-var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var jade = require('jade');
+var methodOverride = require('method-override');
 
-//must come AFTER app.use(bodyParser)
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://toodoo_express:toodoo_express@ds027709.mongolab.com:27709/toodoo_express');
+
+var Schema = mongoose.Schema;
+var TaskItemSchema = new Schema( {
+  title: String,
+  notes: String
+});
+
+var Task = mongoose.model('tasks', TaskItemSchema);
+
 app.set('views', __dirname + '/templates/');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -58,18 +65,21 @@ app.get('/tasks/new', function (req,res) {
 
 //CREATE (api request for params)
   //POST /tasks
-    app.post('/tasks', function(req,res) {
-      var task = new TaskItem({
-      title : req.param('title'),  //var bodyParser = require('body-parser');npm install -S body-parser
-      notes : req.param('notes')
 
-      })
-      task.save(function(wert, task) {
-        if(wert) { res.send(500, wert); }
+app.post('/tasks', function(req,res) {
+  // console.log(req.body); //check if server get messagen from client
 
-        res.redirect('/');
-      })
-    })
+  var task = new Task({
+  title : req.param('title'),  //var bodyParser = require('body-parser');npm install -S body-parser
+  notes : req.param('notes')
+  })
+  // console.log(task); // check b4 saving
+  task.save(function(wert, task) {
+    if(wert) { res.send(500, wert); }
+
+    res.redirect('/tasks/');
+  })
+})
 
 
 
