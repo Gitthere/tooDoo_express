@@ -2,3 +2,6 @@ extends ../layout
 
 block content
   h1 testing list path
+  ul
+    each task in tasksCollection
+      li= task

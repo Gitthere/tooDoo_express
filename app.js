@@ -24,8 +24,16 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
-  res.render('tasks/list.jade');//'/' after jade not necessary.  this will
+  //res.render('tasks/list.jade');//'/' after jade not necessary.  this will
   //render the list.jade content in layout.jade
+  Task.find(function (err, tasks) {
+    var options = {
+      tasksCollection: tasks
+    };
+    console.log(options);
+    
+    res.render('tasks/list.jade', options);
+  });
 });
 
 app.get('/tasks/edit', function (req,res) {
