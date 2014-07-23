@@ -4,4 +4,8 @@ block content
   h1 testing list path
   ul
     each task in tasksCollection
-      li= task
+      li
+        a(href="/tasks/#{task._id}")
+          span.title=task.title
+        br
+        span.notes=task.notes

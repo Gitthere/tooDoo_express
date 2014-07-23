@@ -23,6 +23,8 @@ app.use(bodyParser.urlencoded({
 
 
 
+//LIST
+  //GET /tasks  //lists all tasks
 app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
   //res.render('tasks/list.jade');//'/' after jade not necessary.  this will
   //render the list.jade content in layout.jade
@@ -32,16 +34,22 @@ app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
     };
     //console.log(options);//check if tasks logging
     
-    res.render('tasks/list.jade', options);
+    res.render('tasks/list.jade', options);//renders list of tasks
   });
 });
 
-app.get('/tasks/edit', function (req,res) {
+
+//EDIT
+  //GET /tasks/:id/edit
+app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
   res.render('tasks/edit.jade');//'/' after jade not necessary.  this will
   //render the edit.jade content in layout.jade
 });
 
-app.get('/tasks/new', function (req,res) {
+
+//NEW
+  //GET /tasks/:id
+app.get('/tasks/new', function (req,res) {//allows user to enter new task
   res.render('tasks/new.jade');//'/' after jade not necessary.  this will
   //render the new.jade content in layout.jade
 });
@@ -49,16 +57,11 @@ app.get('/tasks/new', function (req,res) {
 
 
 
-//LIST
-  //GET /tasks
-  // app.get('/', function (req,res){
 
-  // });
   
 
 
-//NEW
-  //GET /tasks/:id
+
 
 
 
@@ -66,7 +69,9 @@ app.get('/tasks/new', function (req,res) {
 
 //SHOW
   //GET /tasks/:id
-
+app.get('/tasks/:id', function (req,res) {
+  res.send('hello world');
+});
 
 
 
@@ -74,7 +79,7 @@ app.get('/tasks/new', function (req,res) {
 //CREATE (api request for params)
   //POST /tasks
 
-app.post('/tasks', function(req,res) {
+app.post('/tasks', function (req,res) {
   // console.log(req.body); //check if server get messagen from client
 
   var task = new Task({
@@ -92,8 +97,7 @@ app.post('/tasks', function(req,res) {
 
 
 
-//EDIT
-  //GET /tasks/:id
+
 
 
 
