@@ -39,34 +39,12 @@ app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
 });
 
 
-//EDIT
-  //GET /tasks/:id/edit
-app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
-  res.render('tasks/edit.jade');//'/' after jade not necessary.  this will
-  //render the edit.jade content in layout.jade
-});
 
-
-//NEW
+//NEW  //shows user form to create new task
   //GET /tasks/:id
 app.get('/tasks/new', function (req,res) {//allows user to enter new task
   res.render('tasks/new.jade');//'/' after jade not necessary.  this will
-  //render the new.jade content in layout.jade
 });
-
-
-//SHOW
-  //GET /tasks/:id
-app.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
-  var id = req.params.id;//create object to be accessed
-  Task.findById(id, function (err, task) {//finds the one task that is clicked
-    res.send(task);//sends selected task to render in browser
-  })
-});
-
-
-
-
 
 //CREATE (api request for params)
   //POST /tasks
@@ -75,16 +53,39 @@ app.post('/tasks', function (req,res) {
   // console.log(req.body); //check if server get messagen from client
 
   var task = new Task({
-  title : req.param('title'),  //var bodyParser = require('body-parser');npm install -S body-parser
-  notes : req.param('notes')
-  })
+    title : req.param('taskTitle'),  //var bodyParser = require('body-parser');npm install -S body-parser
+    notes : req.param('taskNotes')
+  });
   // console.log(task); // check b4 saving
   task.save(function(wert, task) {
     if(wert) { res.send(500, wert); }
 
     res.redirect('/tasks/');
+  });
+});
+
+
+//SHOW individual task
+  //GET /tasks/:id
+app.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
+  var id = req.params.id;//create object to be accessed
+  Task.findById(id, function (err, task) {//finds the one task that is clicked
+    console.log(task);
+    res.render('tasks/show.jade', {task : task});
   })
-})
+});
+//create show.jade to render in browser in non JSON #########
+
+
+//EDIT
+  //GET /tasks/:id/edit
+app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
+  res.render('tasks/edit.jade');//'/' after jade not necessary.  this will
+  //render the edit.jade content in layout.jade
+});
+
+
+
 
 
 
