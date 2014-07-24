@@ -55,23 +55,15 @@ app.get('/tasks/new', function (req,res) {//allows user to enter new task
 });
 
 
-
-
-
-  
-
-
-
-
-
-
-
-
 //SHOW
   //GET /tasks/:id
-app.get('/tasks/:id', function (req,res) {
-  res.send('hello world');
+app.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
+  var id = req.params.id;
+  Task.findById(id, function (err, task) {
+    res.send(task);
+  })
 });
+
 
 
 
