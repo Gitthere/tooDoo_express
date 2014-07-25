@@ -6,7 +6,12 @@ block content
   //-   li= task.notes
 
   h1 Edit the Task
-  form(action="/tasks", method="POST", enctype="application/x-www-form-urlencoded")
+  //- this enables app.put.  Must install node module. Must come after app.use
+  //- app.use(methodOverride('method'));
+  //- need to have "?_method= for action in order for PUT method to work
+  //- refer to method override npm package
+
+  form(action="/tasks/#{task._id}?_method=PUT", method="POST", enctype="application/x-www-form-urlencoded")
     p
       label(for="title_input") Title
       input#title_input( value="#{task.title}", type="text", name="taskTitle")
@@ -14,5 +19,5 @@ block content
       label(for="notes_input") Notes
       input#notes_input( value="#{task.notes}", type="text", name="taskNotes")
     
-    button(type="submit") Edit Task
+    button(type="submit") Submit Editted Task
 

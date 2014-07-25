@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-
+app.use(methodOverride('_method'));
 
 
 //LIST
@@ -83,24 +83,37 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
   Task.findById(req.params.id, function (err, task) {
     //'/' after jade not necessary.  this will
     //render the edit.jade content in layout.jade
-    console.log(task);
     res.render('tasks/edit.jade', {task : task});
   })
 });
 
 
 
+// This enables app.put. Must install node module
+// must come AFTER app.use(bodyParser)
+// // override with POST having ?_method=DELETE
+// app.use(methodOverride('_method'));
 
 
 
-
-
-
-
-
-
-//UPDATE
+//UPDATE  //update the selected task and PUT in
   //PUT /tasks/:id(long number)
+  app.put('/tasks/:id', function (req,res) {
+    var id = req.params.id;//need to create object
+    Task.findOneAndUpdate(
+      {_id: id}, 
+      {
+        title: req.param('taskTitle'),
+        notes: req.param('taskNotes')
+      },
+      function (err, task) {
+        res.redirect('/tasks');
+      }
+    );   
+    // Task.findById(req.params.id, function (err, task) {
+    //   res
+    // })
+  })
   // app.put('/tasks/:id', function(req,res) {
   //   var id = req.param('id');
   //   console.log(req.param(id))
