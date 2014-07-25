@@ -83,7 +83,7 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
   Task.findById(req.params.id, function (err, task) {
     //'/' after jade not necessary.  this will
     //render the edit.jade content in layout.jade
-    res.render('tasks/edit.jade', {task : task});
+    res.render('tasks/edit.jade', {task : task});//calls jade template, automates res.send
   })
 });
 
@@ -110,23 +110,18 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
         res.redirect('/tasks');
       }
     );   
-    // Task.findById(req.params.id, function (err, task) {
-    //   res
-    // })
   })
-  // app.put('/tasks/:id', function(req,res) {
-  //   var id = req.param('id');
-  //   console.log(req.param(id))
 
-  //   taskItem.findOne({_id: id(long number)}, function() {
-  //     //body...
-  //   })
-  // })
 
 
 //DELETE
   //DEL
-
+app.delete('/tasks/:id', function (req,res) {
+  console.log('deletecheck');
+  Task.findByIdAndRemove(req.params.id, function (err,task) {
+    res.redirect('/tasks')
+  });
+});
 
 
 app.listen(3000);
