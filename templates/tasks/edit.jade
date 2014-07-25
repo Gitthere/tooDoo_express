@@ -1,4 +1,18 @@
 extends ../layout
 
 block content
-  h1 testing edit path
+  ul
+    li= task.title
+    li= task.notes
+  //- h1 Edit the Task
+  //- form(action="/tasks", method="POST", enctype="application/x-www-form-urlencoded")
+  //- p
+  //-   label(for="title_input") Title
+  //-   input#title_input( type="text", name="taskTitle")
+  //-     //- task.title
+  //- p
+  //-   label(for="notes_input") Notes
+  //-   input#notes_input( type="text", name="taskNotes")
+  //-     //- task.notes
+  //- p
+  //-   button(type="submit") Update Task

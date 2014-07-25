@@ -70,18 +70,22 @@ app.post('/tasks', function (req,res) {
 app.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
   var id = req.params.id;//create object to be accessed
   Task.findById(id, function (err, task) {//finds the one task that is clicked
-    console.log(task);
+    //console.log(task);
     res.render('tasks/show.jade', {task : task});
   })
 });
-//create show.jade to render in browser in non JSON #########
 
 
-//EDIT
+//EDIT //shows user the edit form, then Update will handle change
   //GET /tasks/:id/edit
 app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
-  res.render('tasks/edit.jade');//'/' after jade not necessary.  this will
-  //render the edit.jade content in layout.jade
+  //finds task to be edited by id
+  Task.findById(req.params.id, function (err, task) {
+    //'/' after jade not necessary.  this will
+    //render the edit.jade content in layout.jade
+    console.log(task);
+    res.render('tasks/edit.jade', {task : task});
+  })
 });
 
 
