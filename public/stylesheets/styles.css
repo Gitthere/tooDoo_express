@@ -2,11 +2,9 @@
  
 }
 
-body {
-  background-color: red;
-}
 
 #title {
+  font: 20px bold;
   margin: 6px;
 }
 
@@ -23,7 +21,7 @@ body {
 
 #delete {
   display: inline-block;
-  background-color: purple;
+  background-color: red;
 }
 
 
