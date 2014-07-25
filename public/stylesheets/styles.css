@@ -1,0 +1,33 @@
+#checkbox {
+ 
+}
+
+body {
+  background-color: red;
+}
+
+#title {
+  margin: 6px;
+}
+
+
+#notes {
+  margin: 25px;
+}
+
+
+#edit {
+  display: inline-block;
+  background-color: salmon;
+}
+
+#delete {
+  display: inline-block;
+  background-color: purple;
+}
+
+
+#deleteForm {
+  display: inline;
+  margin-left: 30px;
+}

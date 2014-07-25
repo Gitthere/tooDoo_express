@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(methodOverride('_method'));
+app.use(express.static(__dirname + '/public'));
 
 
 //LIST
@@ -117,7 +118,7 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
 //DELETE
   //DEL
 app.delete('/tasks/:id', function (req,res) {
-  console.log('deletecheck');
+  //console.log('deletecheck');
   Task.findByIdAndRemove(req.params.id, function (err,task) {
     res.redirect('/tasks')
   });
