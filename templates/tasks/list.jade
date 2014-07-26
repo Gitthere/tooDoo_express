@@ -4,8 +4,11 @@ block content
   h1 Things tooDoo Today
   ul
     each task in tasksCollection
-      li(class="tasklines")
-        input#checkbox( type="checkbox")
+      li(class= (task.checked? "green" : ""))
+        form(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
+          input#checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
+          button Completed Task
+            onclick="red"
         //-link for the title
         a(href="/tasks/#{task._id}")
           span.title#title=task.title

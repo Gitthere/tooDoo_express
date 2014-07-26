@@ -10,7 +10,8 @@ mongoose.connect('mongodb://toodoo_express:toodoo_express@ds027709.mongolab.com:
 var Schema = mongoose.Schema;
 var TaskItemSchema = new Schema( {
   title: String,
-  notes: String
+  notes: String,
+  checked: Boolean
 });
 
 var Task = mongoose.model('tasks', TaskItemSchema);
@@ -27,15 +28,13 @@ app.use(express.static(__dirname + '/public'));
 //LIST
   //GET /tasks  //lists all tasks
 app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
-  //res.render('tasks/list.jade');//'/' after jade not necessary.  this will
-  //render the list.jade content in layout.jade
   Task.find(function (err, tasks) {
     var options = {//create object for array of objects, array will not work
-      tasksCollection: tasks //set property 
+      tasksCollection: tasks 
     };
-    //console.log(options);//check if tasks logging
+    //console.log(options);
     
-    res.render('tasks/list.jade', options);//renders list of tasks
+    res.render('tasks/list.jade', options);
   });
 });
 
@@ -46,6 +45,8 @@ app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
 app.get('/tasks/new', function (req,res) {//allows user to enter new task
   res.render('tasks/new.jade');//'/' after jade not necessary.  this will
 });
+
+
 
 //CREATE (api request for params)
   //POST /tasks
@@ -89,6 +90,17 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
 });
 
 
+//CHECKBOX
+app.post('/tasks/completed/:id', function (req,res) {
+  Task.findById(req.param('id'), function(err,task) {
+    task.checked = !task.checked;
+    task.save(function(err,t) {
+      if (err) res.send(500, err);
+      res.redirect('/tasks');
+    });
+  });
+});
+
 
 // This enables app.put. Must install node module
 // must come AFTER app.use(bodyParser)
@@ -98,20 +110,22 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
 
 
 //UPDATE  //update the selected task and PUT in
-  //PUT /tasks/:id(long number)
-  app.put('/tasks/:id', function (req,res) {
-    var id = req.params.id;//need to create object
-    Task.findOneAndUpdate(
-      {_id: id}, 
-      {
-        title: req.param('taskTitle'),
-        notes: req.param('taskNotes')
-      },
-      function (err, task) {
-        res.redirect('/tasks');
-      }
-    );   
-  })
+//PUT /tasks/:id(long number)
+app.put('/tasks/:id', function (req,res) {
+  var id = req.params.id;//need to create object
+  Task.findOneAndUpdate(
+    {_id: id}, 
+    {
+      title: req.param('taskTitle'),
+      notes: req.param('taskNotes')
+    },
+    function (err, task) {
+      res.redirect('/tasks');
+    }
+  );   
+})
+
+
 
 
 

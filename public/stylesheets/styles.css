@@ -29,3 +29,9 @@
   display: inline;
   margin-left: 30px;
 }
+
+
+.green {
+  background-color: yellow;
+  text-decoration: line-through;
+}
