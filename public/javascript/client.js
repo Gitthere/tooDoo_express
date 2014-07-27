@@ -4,7 +4,6 @@ $( document ).ready(function() {
   $('.checkbox').click(function() {
     $(this).parent().submit()
   });
-  // var l = $('li');
   var incompleteTask = $('.incomplete');
   $('#taskCounter').html(incompleteTask.length + ' tasks remaining');
 });

@@ -16,6 +16,8 @@ var TaskItemSchema = new Schema( {
 
 var Task = mongoose.model('tasks', TaskItemSchema);
 
+
+
 app.set('views', __dirname + '/templates/');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
