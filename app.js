@@ -86,7 +86,7 @@ app.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
     //'/' after jade not necessary.  this will
     //render the edit.jade content in layout.jade
     res.render('tasks/edit.jade', {task : task});//calls jade template, automates res.send
-  })
+  });
 });
 
 
