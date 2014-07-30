@@ -8,7 +8,8 @@ $( document ).ready(function() {
   $('#taskCounter').html(incompleteTask.length + ' tasks remaining');
 
 
-  $( '.draggable' ).draggable();
+  $( '.sortable' ).sortable();
+  $( '.sortable' ).disableSelection();
 
 });
 
