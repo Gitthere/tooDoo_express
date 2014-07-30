@@ -1,24 +1,46 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  margin-left: 25px;
+  color: white;
+}
+
+ul {
+  margin-left: 30px;
+  list-style-type: cjk-ideographic;
+  color: white;
+}
+
 #taskCounter {
+  margin-left: 25px;
+  color: white;
   font-size: 30px;
 }
 
 #title {
-  font: 20px bold;
-  margin: 6px;
+  font-style: arial;
+  color: white;
+  font: 30px bold;
+  margin-top: -20px;
 }
 
 
 #notes {
+  font-style: arial;
   margin: 25px;
 }
 
 
 #edit {
+  padding: 5px;
   display: inline-block;
   background-color: salmon;
 }
 
 #delete {
+  padding: 5px;
   display: inline-block;
   background-color: red;
 }
@@ -31,6 +53,13 @@
 
 
 .green {
-  background-color: yellow;
+  background-color: #f6f6f6;
   text-decoration: line-through;
 }
+
+
+// Small screens
+@media only screen and (max-width: 40em) { } 
+/* max-width 640px, mobile-only styles, use when QAing 
+mobile issues */
+

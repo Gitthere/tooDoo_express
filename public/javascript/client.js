@@ -6,6 +6,10 @@ $( document ).ready(function() {
   });
   var incompleteTask = $('.incomplete');
   $('#taskCounter').html(incompleteTask.length + ' tasks remaining');
+
+
+  $( '.draggable' ).draggable();
+
 });
 
 

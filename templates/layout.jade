@@ -2,16 +2,18 @@ doctype html
 html(lang="en")
   head
     title= tooDoo_express
-    link(href="/stylesheets/foundation.min.css")
-    link(href="/stylesheets/normalize.css")
+    link(href="/stylesheets/foundation.min.css", type="text/css", rel="stylesheet")
+    link(href="/stylesheets/normalize.css", type="text/css", rel="stylesheet")
+    link(rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css")
     link(href="/stylesheets/styles.css", type="text/css", rel="stylesheet")
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js")
     script(src="/javascript/client.js")
     script(src="/javascript/vendor/modernizr.js")
     script(src="/javascript/foundation.min.js")
   body
-    h1 TooDoo List
-    block content  
+    .row
+      block content
       //- the block content from list.jade, edit.jade and new.jade will render
       //- here
     //- script(src="/js/vendor/jquery.js")

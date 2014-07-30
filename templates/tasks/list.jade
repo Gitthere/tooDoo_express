@@ -1,22 +1,26 @@
 extends ../layout
 
 block content
-  h1 Things tooDoo Today
-  div#taskCounter Task Counter
-  ul
-    each task in tasksCollection
-      li#li(class= (task.checked? "green" : "incomplete"))
-        form.submitForm.id(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
-          input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
-        //-link for the title
-        a(href="/tasks/#{task._id}")
-          span.title#title=task.title
-        br
-        span.notes#notes=task.notes
-        br
-        a(href="/tasks/#{task._id}/edit")
-          button#edit Edit
-        //- a(href="/tasks/#{task._id, }?_method=DELETE")
-        //-   button Delete
-        form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
-          button#delete(type="submit") Delete
+  div
+    div.small-12.medium-6.large-6.small-centered.columns
+      br
+      h1 TooDoo List
+      div#taskCounter Task Counter
+      ul
+        each task in tasksCollection
+          div.draggable
+            li.li(class= (task.checked? "green" : "incomplete"))
+              form.submitForm.id(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
+                input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
+              //-link for the title
+              a(href="/tasks/#{task._id}")
+                span.title#title=task.title
+              br
+              span.notes#notes=task.notes
+              br
+              a(href="/tasks/#{task._id}/edit")
+                button#edit Edit
+              //- a(href="/tasks/#{task._id, }?_method=DELETE")
+              //-   button Delete
+              form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
+                button#delete(type="submit") Delete
