@@ -36,6 +36,7 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
 
+//USERS*************
 app.post('/users', function (req,res) {
   //console.log(req.body);  //check to see if server got message from client
   var user = new User({
@@ -49,6 +50,12 @@ app.post('/users', function (req,res) {
     res.redirect('/tasks/')
   });
 });
+
+//LOG IN
+app.get('/users/new', function (req,res) {
+  res.render('tasks/login.jade');
+});
+
 
 //PERTAINING TO TASKS************
 //LIST
