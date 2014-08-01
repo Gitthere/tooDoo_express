@@ -5,9 +5,18 @@ var jade = require('jade');
 var methodOverride = require('method-override');
 
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 mongoose.connect('mongodb://toodoo_express:toodoo_express@ds027709.mongolab.com:27709/toodoo_express');
 
-var Schema = mongoose.Schema;
+var UserSchema = new Schema( {
+  name: String,
+  email: String,
+  password: String
+});
+
+var User = mongoose.model('users', UserSchema);
+
+
 var TaskItemSchema = new Schema( {
   title: String,
   notes: String,
@@ -27,6 +36,21 @@ app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
 
+app.post('/users', function (req,res) {
+  //console.log(req.body);  //check to see if server got message from client
+  var user = new User({
+    name: req.param('userName'),
+    email: req.param('userEmail'),
+    password: req.param('userPassword')
+  });
+  //console.log(user);  //check b4 saving
+  user.save(function(wert, user) {
+    if(wert) { res.send(500, wert); }
+    res.redirect('/tasks/')
+  });
+});
+
+//PERTAINING TO TASKS************
 //LIST
   //GET /tasks  //lists all tasks
 app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
@@ -139,7 +163,7 @@ app.delete('/tasks/:id', function (req,res) {
     res.redirect('/tasks')
   });
 });
-
+//PERTAINING TO TASKS************
 
 app.listen(3000);
 
