@@ -44,16 +44,40 @@ app.post('/users', function (req,res) {
     email: req.param('userEmail'),
     password: req.param('userPassword')
   });
-  //console.log(user);  //check b4 saving
+  console.log(user);  //check b4 saving
   user.save(function(wert, user) {
     if(wert) { res.send(500, wert); }
     res.redirect('/tasks/')
   });
 });
 
-//LOG IN
-app.get('/users/new', function (req,res) {
+//REGISTER - renders login form
+app.get('/users/register', function (req,res) {
   res.render('tasks/login.jade');
+});
+
+
+//FOR LOGIN VALIDATION: NEED TO FIND AND MATCH EMAIL IN
+//DB WITH ENTERED EMAIL FIRST, THEN VIA IF STATEMENT, 
+//CHECK IF PASSWORD IS PAIRED WITH GIVEN EMAIL
+//FIND AND CHECK OCCURS IN CALLBACK LINE 49
+
+//LOGIN
+app.post('/users/login', function (req,res) {
+  if ('userName' === '') {
+    res.redirect('/users/login');
+  };
+
+  User.findOne({'email': req.param('userEmail')}, function (wert, users) {
+    console.log(users.email);
+
+    if (req.param('userPassword') === users.password) {
+      console.log('match');
+      res.redirect('/tasks/');
+    } else {
+      res.redirect('/users/login');
+    } 
+  });
 });
 
 
@@ -63,7 +87,7 @@ app.get('/users/new', function (req,res) {
 app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
   Task.find(function (err, tasks) {
     var options = {//create object for array of objects, array will not work
-      tasksCollection: tasks 
+      tasksCollection: tasks
     };
     //console.log(options);
     

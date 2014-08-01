@@ -1,15 +1,12 @@
 extends ../layout
 
 block content
-  div#loginPage Please Log In
+  div Please Log In Using Your Email and Password
     form.loginForm.id(action="/users/", method="POST", enctype="application/x-www-form-urlencoded")
-      p
-        label(for="name_input") Name
-        input.name_input(name="name_input", type="text")
-      p
+      p 
         label(for="email_input") Email
-        input.email_input(name="email_input", type="text")
-      p
+        input.email_input(name="userEmail", type="text")
+      p 
         label(for="password_input") Password
-        input.password_input(name="password_input", type="text")
+        input.password_input(name="userPassword", type="text")
       button#loginButton(type="submit") Login

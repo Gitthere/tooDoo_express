@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  div#registrationPage Please Register
+    form.registrationForm.id(action="/users/", method="POST", enctype="application/x-www-form-urlencoded")
+      p
+        label(for="name_input") Name
+        input.name_input(name="userName", type="text")
+      p
+        label(for="email_input") Email
+        input.email_input(name="userEmail", type="text")
+      p
+        label(for="password_input") Password
+        input.password_input(name="userPassword", type="text")
+      button#registrationButton(type="submit") Register
