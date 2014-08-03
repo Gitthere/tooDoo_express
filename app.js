@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var jade = require('jade');
 var methodOverride = require('method-override');
-
+var session = require('express-session')
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.connect('mongodb://toodoo_express:toodoo_express@ds027709.mongolab.com:27709/toodoo_express');
@@ -34,9 +34,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
-
+app.use(session({ secret : 'sauce'}));
 
 //USERS*************
+//REGISTER - renders registration form
+app.get('/users/register', function (req,res) {
+  res.render('users/register.jade');
+});
+
+
+//writes user info to db
 app.post('/users', function (req,res) {
   //console.log(req.body);  //check to see if server got message from client
   var user = new User({
@@ -51,28 +58,32 @@ app.post('/users', function (req,res) {
   });
 });
 
-//REGISTER - renders login form
-app.get('/users/register', function (req,res) {
-  res.render('tasks/login.jade');
-});
+
+//LOGIN - renders login form
+app.get('/users/login', function (req,res) {
+  res.render('users/login.jade');
+})
 
 
-//FOR LOGIN VALIDATION: NEED TO FIND AND MATCH EMAIL IN
-//DB WITH ENTERED EMAIL FIRST, THEN VIA IF STATEMENT, 
-//CHECK IF PASSWORD IS PAIRED WITH GIVEN EMAIL
-//FIND AND CHECK OCCURS IN CALLBACK LINE 49
-
-//LOGIN
+//LOGIN VERIFICATION - verifies login info and checks password
 app.post('/users/login', function (req,res) {
-  if ('userName' === '') {
-    res.redirect('/users/login');
+  if (req.param('userEmail') === ''){//*************************
+    res.render('users/login.jade', {errors : 'Incorrect Email'});
+    return;
   };
 
-  User.findOne({'email': req.param('userEmail')}, function (wert, users) {
-    console.log(users.email);
+  if (req.param('userPassword') === '') {
+    res.render('users/login.jade', {errors : 'Incorrect Password'});
+    return;
+  }
 
+  User.findOne({'email': req.param('userEmail')}, function (wert, users) {
+    if (users.length ==)
+    console.log(users.email);
+    //checks to see if password of email entered matches db pswd
     if (req.param('userPassword') === users.password) {
       console.log('match');
+      req.session.user = users;
       res.redirect('/tasks/');
     } else {
       res.redirect('/users/login');
@@ -81,18 +92,33 @@ app.post('/users/login', function (req,res) {
 });
 
 
+//LOGOUT
+app.get('/logout', function (req, res) {
+  req.session.user = undefined;
+  res.redirect('/users/login');
+
+})
+
+
+
+
+
 //PERTAINING TO TASKS************
 //LIST
   //GET /tasks  //lists all tasks
-app.get('/tasks/', function (req,res){ //need '/' before tasks for server side
-  Task.find(function (err, tasks) {
-    var options = {//create object for array of objects, array will not work
-      tasksCollection: tasks
-    };
-    //console.log(options);
-    
-    res.render('tasks/list.jade', options);
-  });
+app.get('/tasks', function (req,res){ //need '/' before tasks for server side
+  if (req.session.user !== undefined) {
+    Task.find({user_id: req.session.user.id}, function (err, tasks) {
+      var options = {//create object for array of objects, array will not work
+        tasksCollection: tasks
+      };
+      //console.log(options);
+      
+      res.render('tasks/list.jade', options);
+    });
+  } else {//not logged in
+    res.redirect('/users/login');
+  }
 });
 
 
