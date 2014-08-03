@@ -67,7 +67,7 @@ app.get('/users/login', function (req,res) {
 
 //LOGIN VERIFICATION - verifies login info and checks password
 app.post('/users/login', function (req,res) {
-  if (req.param('userEmail') === ''){//*************************
+  if (req.param('userEmail') === '') {//checks if form empty
     res.render('users/login.jade', {errors : 'Incorrect Email'});
     return;
   };
@@ -78,16 +78,20 @@ app.post('/users/login', function (req,res) {
   }
 
   User.findOne({'email': req.param('userEmail')}, function (wert, users) {
-    if (users.length ==)
-    console.log(users.email);
-    //checks to see if password of email entered matches db pswd
-    if (req.param('userPassword') === users.password) {
-      console.log('match');
-      req.session.user = users;
-      res.redirect('/tasks/');
-    } else {
-      res.redirect('/users/login');
-    } 
+    if (users !== null) {//user is found in db
+      //checks to see if password of email entered matches db pswd
+      if (req.param('userPassword') === users.password) {
+        console.log('match');
+        req.session.user = users;
+        res.redirect('/tasks/');
+      } else {
+        // res.redirect('/users/login');
+        res.render('users/login.jade', {errors : 'Either the email or password is incorrect, please try again.'});
+      } 
+    } else {//user is not found in db
+      res.render('users/login.jade', {errors : 'Either the email or password is incorrect, please try again.'});
+    }
+    
   });
 });
 
