@@ -5,6 +5,8 @@ block content
     div.small-12.medium-6.large-6.small-centered.columns
       br
       h1 TooDoo List
+      a(href="/logout")
+        button#logout(type="submit") Logout
       div#taskCounter Task Counter
       ul.sortable
         each task in tasksCollection
@@ -24,6 +26,4 @@ block content
               //-   button Delete
               form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
                 button#delete(type="submit") Delete
-              a(href="/logout")
-                button#logout(type="submit") Logout
           div.droppable

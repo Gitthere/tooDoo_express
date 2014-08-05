@@ -6,6 +6,8 @@ block content
   //-   li= task.notes
 
   h1 Edit the Task
+  a(href="/logout")
+    button#logout(type="submit") Logout
   //- this enables app.put.  Must install node module. Must come after app.use
   //- app.use(methodOverride('method'));
   //- need to have "?_method= for action in order for PUT method to work
@@ -19,7 +21,5 @@ block content
       label(for="notes_input") Notes
       input#notes_input( value="#{task.notes}", type="text", name="taskNotes")
     
-    button(type="submit") Submit Editted Task
-  //- form(action="/logout", method="GET", enctype="application/x-www-form-urlencoded")
-  a(href="/logout")
-    button#logout(type="submit") Logout
+    button#submitEdittedTask(type="submit") Submit Editted Task
+  
