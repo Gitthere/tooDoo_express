@@ -82,7 +82,7 @@ app.post('/users/login', function (req,res) {
       //checks to see if password of email entered matches db pswd
       if (req.param('userPassword') === users.password) {
         console.log('match');
-        req.session.user = users;
+        req.session.user = users;//store in session
         res.redirect('/tasks/');
       } else {
         // res.redirect('/users/login');
@@ -101,7 +101,7 @@ app.get('/logout', function (req, res) {
   req.session.user = undefined;
   res.redirect('/users/login');
 
-})
+});
 
 
 
@@ -112,7 +112,8 @@ app.get('/logout', function (req, res) {
   //GET /tasks  //lists all tasks
 app.get('/tasks', function (req,res){ //need '/' before tasks for server side
   if (req.session.user !== undefined) {
-    Task.find({user_id: req.session.user.id}, function (err, tasks) {
+    Task.find({user_id: req.session.user._id}, function (err, tasks) {
+      console.log(req.session.user._id);
       var options = {//create object for array of objects, array will not work
         tasksCollection: tasks
       };
