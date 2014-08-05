@@ -20,4 +20,6 @@ block content
       input#notes_input( value="#{task.notes}", type="text", name="taskNotes")
     
     button(type="submit") Submit Editted Task
-
+  //- form(action="/logout", method="GET", enctype="application/x-www-form-urlencoded")
+  a(href="/logout")
+    button#logout(type="submit") Logout

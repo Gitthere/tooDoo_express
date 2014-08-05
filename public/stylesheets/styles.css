@@ -16,13 +16,17 @@ body {
 }
 
 
-
-
 #login {
   color: white;
   font-size: 30px;
 }
 
+
+#logout {
+  float: right;
+  padding: 5px;
+  display: inline-block;
+}
 
 .loginForm {
   margin-top: 40px;

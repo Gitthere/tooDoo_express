@@ -6,7 +6,6 @@ block content
       br
       h1 TooDoo List
       div#taskCounter Task Counter
-      p.errors =errors
       ul.sortable
         each task in tasksCollection
           div.draggable
@@ -25,4 +24,6 @@ block content
               //-   button Delete
               form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
                 button#delete(type="submit") Delete
+              a(href="/logout")
+                button#logout(type="submit") Logout
           div.droppable
