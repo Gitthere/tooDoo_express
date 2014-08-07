@@ -15,6 +15,10 @@ body {
   color: white;
 }
 
+#registrationButton {
+  border-radius: 15px;
+}
+
 
 #login {
   color: white;
@@ -52,8 +56,23 @@ body {
   color: white;
 }
 
+#createTaskButton {
+  border-radius: 15px;
+}
+
+#createNewTaskFromListButton {
+  margin-top: 40px;
+  border-radius: 15px;
+  color: white;
+}
+
+
+label {
+  color: white;
+}
+
+
 h1 {
-  margin-left: 25px;
   color: white;
 }
 
@@ -69,7 +88,7 @@ ul {
 }
 
 #taskCounter {
-  margin-left: 25px;
+  /*margin-left: 25px;*/
   color: white;
   font-size: 30px;
 }

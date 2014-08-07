@@ -20,6 +20,7 @@ var User = mongoose.model('users', UserSchema);
 var TaskItemSchema = new Schema( {
   title: String,
   notes: String,
+  userId: String,
   checked: Boolean
 });
 
@@ -35,6 +36,9 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 app.use(session({ secret : 'sauce'}));
+
+
+
 
 //USERS*************
 //REGISTER - renders registration form
@@ -54,7 +58,7 @@ app.post('/users', function (req,res) {
   console.log(user);  //check b4 saving
   user.save(function(wert, user) {
     if(wert) { res.send(500, wert); }
-    res.redirect('/tasks/')
+    res.redirect('/tasks/new')
   });
 });
 
@@ -113,6 +117,7 @@ app.get('/logout', function (req, res) {
 app.get('/tasks', function (req,res){ //need '/' before tasks for server side
   if (req.session.user !== undefined) {
     Task.find({user_id: req.session.user._id}, function (err, tasks) {
+      console.log(tasks);
       console.log(req.session.user._id);
       var options = {//create object for array of objects, array will not work
         tasksCollection: tasks
@@ -141,10 +146,11 @@ app.get('/tasks/new', function (req,res) {//allows user to enter new task
 
 app.post('/tasks', function (req,res) {
   // console.log(req.body); //check if server get messagen from client
-
+  console.log(req.session.user._id);
   var task = new Task({
     title : req.param('taskTitle'),  //var bodyParser = require('body-parser');npm install -S body-parser
-    notes : req.param('taskNotes')
+    notes : req.param('taskNotes'),
+    userId: req.session.user._id //need to log in to get req.session.user data
   });
   // console.log(task); // check b4 saving
   task.save(function(wert, task) {
@@ -226,6 +232,17 @@ app.delete('/tasks/:id', function (req,res) {
   });
 });
 //PERTAINING TO TASKS************
+
+
+//renders login page to get users to login page if incorrect route entered
+app.get('/', function (req, res) {
+  res.redirect('/users/login');
+});
+//always use last.  catch all that handles requests that do not have specific route entered
+app.get('*', function (req, res) {
+  res.redirect('/users/login');
+});
+
 
 app.listen(3000);
 

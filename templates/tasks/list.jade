@@ -27,3 +27,5 @@ block content
               form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
                 button#delete(type="submit") Delete
           div.droppable
+      a(href="/tasks/new")
+        button#createNewTaskFromListButton(type="submit") Create New Task
