@@ -2,6 +2,21 @@ body {
   background-color: black;
 }
 
+#indexLoginButton {
+  color: white;
+  border-radius: 15px;
+  display: inline-block;
+  font-size: 30px;
+}
+
+#indexRegistrationButton {
+  color: white;
+  border-radius: 15px;
+  display: inline-block;
+  font-size: 30px;
+  margin-left: 100px;
+}
+
 #registrationPage {
   color: white;
   font-size: 30px;

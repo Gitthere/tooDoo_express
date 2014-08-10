@@ -1,4 +1,8 @@
 extends layout
 
 block content
-  h1 Hello World
+  h1 Would You Like To Login or Register A New Account?
+  a(href="/login")
+    button#indexLoginButton(type="submit") Login
+  a(href="users/register")
+    button#indexRegistrationButton(type="submit") Register

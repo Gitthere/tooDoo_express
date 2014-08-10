@@ -9,6 +9,8 @@ var UserSchema = new Schema( {
 });
 var User = mongoose.model('users', UserSchema);
 
+
+
 //REGISTER - renders registration form
 app.get('/register', function (req,res) {
   res.render('users/register.jade');
@@ -31,8 +33,6 @@ app.post('/usersave', function (req,res) {
     res.redirect('/tasks/new')
   });
 });
-
-
 
 
 //LOGIN VERIFICATION - verifies login info and checks password
