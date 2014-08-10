@@ -33,10 +33,6 @@ app.post('/usersave', function (req,res) {
 });
 
 
-//LOGIN - renders login form
-app.get('/login', function (req,res) {
-  res.render('users/login.jade');
-})
 
 
 //LOGIN VERIFICATION - verifies login info and checks password
