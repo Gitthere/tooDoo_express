@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   div#registrationPage Please Register
-    form.registrationForm.id(action="/users/", method="POST", enctype="application/x-www-form-urlencoded")
+    form.registrationForm.id(action="/users/usersave", method="POST", enctype="application/x-www-form-urlencoded")
       p
         label(for="name_input") Name
         input.name_input(name="userName", type="text")
