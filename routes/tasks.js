@@ -2,11 +2,27 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var TaskItemSchema = new Schema( {
+  title: String,
+  notes: String,
+  userId: String,
+  checked: Boolean
+});
+var Task = mongoose.model('tasks', TaskItemSchema);
+
+router.use(function(req,res,next) {
+  if(!req.session.user){
+    res.redirect('/login');
+    return;
+  }
+  next();
+});
+
 
 //PERTAINING TO TASKS************
 //LIST
   //GET /tasks  //lists all tasks
-router.get('/tasks', function (req,res){ //need '/' before tasks for server side
+router.get('/', function (req,res){ //need '/' before tasks for server side
   if (req.session.user !== undefined) {
     Task.find({user_id: req.session.user._id}, function (err, tasks) {
       console.log(tasks);
@@ -27,7 +43,7 @@ router.get('/tasks', function (req,res){ //need '/' before tasks for server side
 
 //NEW  //shows user form to create new task
   //GET /tasks/:id
-router.get('/tasks/new', function (req,res) {//allows user to enter new task
+router.get('/new', function (req,res) {//allows user to enter new task
   res.render('tasks/new.jade');//'/' after jade not necessary.  this will
 });
 
@@ -36,7 +52,7 @@ router.get('/tasks/new', function (req,res) {//allows user to enter new task
 //CREATE (api request for params)
   //POST /tasks
 
-router.post('/tasks', function (req,res) {
+router.post('/', function (req,res) {
   // console.log(req.body); //check if server get messagen from client
   console.log(req.session.user._id);
   var task = new Task({
@@ -55,7 +71,7 @@ router.post('/tasks', function (req,res) {
 
 //SHOW individual task
   //GET /tasks/:id
-router.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
+router.get('/:id', function (req,res) {//allow visitor to reach this id
   var id = req.params.id;//create object to be accessed
   Task.findById(id, function (err, task) {//finds the one task that is clicked
     //console.log(task);
@@ -66,7 +82,7 @@ router.get('/tasks/:id', function (req,res) {//allow visitor to reach this id
 
 //EDIT //shows user the edit form, then Update will handle change
   //GET /tasks/:id/edit
-router.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
+router.get('/:id/edit', function (req,res) {//allows editing of tasks
   //finds task to be edited by id
   Task.findById(req.params.id, function (err, task) {
     //'/' after jade not necessary.  this will
@@ -77,7 +93,7 @@ router.get('/tasks/:id/edit', function (req,res) {//allows editing of tasks
 
 
 //CHECKBOX
-router.post('/tasks/completed/:id', function (req,res) {
+router.post('/completed/:id', function (req,res) {
   Task.findById(req.param('id'), function(err,task) {
     task.checked = !task.checked;
     task.save(function(err,t) {
@@ -97,7 +113,7 @@ router.post('/tasks/completed/:id', function (req,res) {
 
 //UPDATE  //update the selected task and PUT in
 //PUT /tasks/:id(long number)
-router.put('/tasks/:id', function (req,res) {
+router.put('/:id', function (req,res) {
   var id = req.params.id;//need to create object
   Task.findOneAndUpdate(
     {_id: id}, 
@@ -117,7 +133,7 @@ router.put('/tasks/:id', function (req,res) {
 
 //DELETE
   //DEL
-router.delete('/tasks/:id', function (req,res) {
+router.delete('/:id', function (req,res) {
   //console.log('deletecheck');
   Task.findByIdAndRemove(req.params.id, function (err,task) {
     res.redirect('/tasks')
