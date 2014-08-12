@@ -1,13 +1,14 @@
 extends ../layout
 
 block content
-  div#login Please Log In Using Your Email and Password
-    p.errors= errors
-    form.loginForm.id(action="/users/login", method="POST", enctype="application/x-www-form-urlencoded")
-      p 
-        label#loginEmail(for="email_input") Email
-        input.email_input(name="userEmail", type="text")
-      p 
-        label#loginPassword(for="password_input") Password
-        input.password_input(name="userPassword", type="text")
-      button#loginButton(type="submit") Login
+  div.small-12.medium-6.large-centered.columns
+    div#login Please Log In Using Your Email and Password
+      p.errors= errors
+      form.loginForm.id(action="/users/login", method="POST", enctype="application/x-www-form-urlencoded")
+        p 
+          label#loginEmail(for="email_input") Email
+          input.email_input(name="userEmail", type="text")
+        p 
+          label#loginPassword(for="password_input") Password
+          input.password_input(name="userPassword", type="text")
+        button#loginButton(type="submit") Login
