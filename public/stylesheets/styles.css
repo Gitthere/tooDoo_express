@@ -17,13 +17,15 @@ body {
   margin-left: 100px;
 }
 
+#nameOfUserLoggedIn {
+  color: white;
+  font-size: 20px;
+  display: inline-block;
+}
+
 #registrationPage {
   color: white;
   font-size: 30px;
-}
-
-#name_input {
-  border-radius: 15px;
 }
 
 
