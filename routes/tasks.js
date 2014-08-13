@@ -15,6 +15,7 @@ router.use(function(req,res,next) {
     res.redirect('/login');
     return;
   }
+  res.locals.name = req.session.user.name;
   next();
 });
 
@@ -24,11 +25,13 @@ router.use(function(req,res,next) {
   //GET /tasks  //lists all tasks
 router.get('/', function (req,res){ //need '/' before tasks for server side
   if (req.session.user !== undefined) {
-    Task.find({user_id: req.session.user._id}, function (err, tasks) {
+    Task.find({userId: req.session.user._id}, function (err, tasks) {
       console.log(tasks);
       console.log(req.session.user._id);
+      console.log(req.session.user);
       var options = {//create object for array of objects, array will not work
         tasksCollection: tasks
+        // userName: req.session.user.name//app.locals // needmiddleware to be visible on every page
       };
       //console.log(options);
       

@@ -22,6 +22,11 @@ body {
   font-size: 30px;
 }
 
+#name_input {
+  border-radius: 15px;
+}
+
+
 .registrationForm {
   margin-top: 40px;
 }
