@@ -28,8 +28,8 @@ app.post('/usersave', function (req,res) {
     password: req.param('userPassword')
   });
   console.log(user);  //check b4 saving
-  user.save(function(wert, user) {
-    if(wert) { res.send(500, wert); }
+  user.save(function(err, user) {
+    if(err) { res.send(500, err); }
     res.redirect('/tasks/new')
   });
 });
