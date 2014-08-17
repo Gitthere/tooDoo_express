@@ -14,7 +14,8 @@ html(lang="en")
   body
     .row
       include head
-      span#nameOfUserLoggedIn= name + (' is logged in')
+      if (name !== undefined)
+        span#nameOfUserLoggedIn= name + (' is logged in')
       block content
       //- the block content from list.jade, edit.jade and new.jade will render
       //- here
