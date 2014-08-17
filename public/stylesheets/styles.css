@@ -167,18 +167,18 @@ ul {
 }
 
 
-// Small screens
+/*// Small screens
 @media only screen and (max-width: 40em) { 
   #newTaskToBeAdded {
    clear: both; 
   }
 } 
-/* max-width 640px, mobile-only styles, use when QAing 
-mobile issues */
+ max-width 640px, mobile-only styles, use when QAing 
+mobile issues 
 
 // Medium screens
 @media only screen and (min-width: 40.063em) { 
   #newTaskToBeAdded {
    clear: both; 
   }
-}
+}*/

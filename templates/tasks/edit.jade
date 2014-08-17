@@ -4,22 +4,23 @@ block content
   //- ul
   //-   li= task.title
   //-   li= task.notes
-
-  h1 Edit the Task
+  div.small-12.medium-6.large-centered.columns
   a(href="/logout")
     button#logout(type="submit") Logout
-  //- this enables app.put.  Must install node module. Must come after app.use
-  //- app.use(methodOverride('method'));
-  //- need to have "?_method= for action in order for PUT method to work
-  //- refer to method override npm package
+  div.small-12.medium-6.large-centered.columns
+    h1 Edit the Task
+    //- this enables app.put.  Must install node module. Must come after app.use
+    //- app.use(methodOverride('method'));
+    //- need to have "?_method= for action in order for PUT method to work
+    //- refer to method override npm package
 
-  form(action="/tasks/#{task._id}?_method=PUT", method="POST", enctype="application/x-www-form-urlencoded")
-    p
-      label(for="title_input") Title
-      input#title_input( value="#{task.title}", type="text", name="taskTitle")
-    p
-      label(for="notes_input") Notes
-      input#notes_input( value="#{task.notes}", type="text", name="taskNotes")
-    
-    button#submitEdittedTask(type="submit") Submit Editted Task
+    form(action="/tasks/#{task._id}?_method=PUT", method="POST", enctype="application/x-www-form-urlencoded")
+      p
+        label(for="title_input") Title
+        input#title_input( value="#{task.title}", type="text", name="taskTitle")
+      p
+        label(for="notes_input") Notes
+        input#notes_input( value="#{task.notes}", type="text", name="taskNotes")
+      
+      button#submitEdittedTask(type="submit") Submit Editted Task
   
