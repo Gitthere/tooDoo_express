@@ -136,6 +136,38 @@ ul {
 }
 
 
+#newTaskTitleAboveBox {
+  color: white;
+}
+
+
+#newTaskNotesAboveBox {
+  color: white;
+}
+
+
+#new_task_title {
+  border-radius: 15px;
+  display: inline-block;
+  width: 70%;
+  margin-right: 5%;
+}
+
+
+#new_task_notes {
+  border-radius: 15px;
+  display: inline-block;
+  width: 70%;
+  margin-right: 5%;
+}
+
+
+#add_new_task {
+  border-radius: 15px;
+  width: 20%:;
+
+}
+
 #edit {
   padding: 5px;
   display: inline-block;

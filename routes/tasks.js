@@ -57,6 +57,7 @@ router.get('/new', function (req,res) {//allows user to enter new task
 
 router.post('/', function (req,res) {
   // console.log(req.body); //check if server get messagen from client
+  console.log(req.body);
   console.log(req.session.user._id);
   var task = new Task({
     title : req.param('taskTitle'),  //var bodyParser = require('body-parser');npm install -S body-parser
@@ -67,7 +68,7 @@ router.post('/', function (req,res) {
   task.save(function(wert, task) {
     if(wert) { res.send(500, wert); }
 
-    res.redirect('/tasks/');
+    res.json(task);
   });
 });
 

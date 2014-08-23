@@ -6,6 +6,14 @@ block content
     a(href="/logout")
       button#logout(type="submit") Logout
     div.small-12.medium-6.large-6.small-centered.columns
+      h1#newTaskToBeAdded New Task To Be Added 
+      form#newTaskForm
+        p#newTaskTitleAboveBox Title 
+         input#new_task_title(name="taskTitle" type="text")
+        p#newTaskNotesAboveBox Notes 
+         input#new_task_notes(name="taskNotes" type="text") 
+         button#add_new_task(type="submit") Add
+    div.small-12.medium-6.large-6.small-centered.columns
       br
       h1 TooDoo List
       div#taskCounter Task Counter
@@ -28,5 +36,5 @@ block content
               form#deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
                 button#delete(type="submit") Delete
           div.droppable
-      a(href="/tasks/new")
-        button#createNewTaskFromListButton(type="submit") Create New Task
+      //- a(href="/tasks/new")
+      //-   button#createNewTaskFromListButton(type="submit") Create New Task

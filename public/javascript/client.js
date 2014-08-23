@@ -12,6 +12,25 @@ $( document ).ready(function() {
   $( '.sortable' ).sortable();
   $( '.sortable' ).disableSelection();
 
+  $('#newTaskForm').submit(function(event) {
+    event.preventDefault();
+    console.log('submit?');
+    console.log('newTaskForm; ', $('#newTaskForm').serialize());
+    $.ajax("/tasks", {
+      method: "POST", 
+      data: $('#newTaskForm').serialize(),
+      success: function(task) {
+        console.log(task);
+        var newTaskTitle = task.title;
+        var newTaskNotes = task.notes;
+        var newTask = newTaskTitle + newTaskNotes;
+        $('.sortable').append(newTask);
+      },
+      failure: function(error) {
+      }
+    });
+  });
+
   // //remove task when dragged outside of div
   // $( '.draggable').draggable();
   // $( '.droppable').droppable({
