@@ -140,7 +140,10 @@ router.put('/:id', function (req,res) {
 router.delete('/:id', function (req,res) {
   //console.log('deletecheck');
   Task.findByIdAndRemove(req.params.id, function (err,task) {
-    res.redirect('/tasks')
+    if (err) {
+      res.send(500);
+    }
+    res.send(200);
   });
 });
 //PERTAINING TO TASKS************

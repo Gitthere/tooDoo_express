@@ -189,7 +189,7 @@ ul {
 }
 
 
-#deleteForm {
+.deleteForm {
   display: inline;
   margin-left: 30px;
 }
