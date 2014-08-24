@@ -21,10 +21,41 @@ $( document ).ready(function() {
       data: $('#newTaskForm').serialize(),
       success: function(task) {
         console.log(task);
-        var newTaskTitle = task.title;
-        var newTaskNotes = task.notes;
-        var newTask = newTaskTitle + newTaskNotes;
-        $('.sortable').append(newTask);
+        var newLi = $('<li/>').addClass('li');
+        var newForm = $('<form/>').addClass('submitForm id');
+        var newInputCheckbox = $('<input type="checkbox"/>').addClass('checkbox');
+        var newAForTitle = $('<a/>');
+        var newSpan = $('<span/>').addClass('title');
+        var newSpanNotes = $('<span/>').addClass('notes');
+        var newAForEdit = $('<a/>');
+        var newEditButton = $('<button/>').attr("id", "edit");
+        var newDeleteForm = $('<form>').attr("id", "deleteForm");
+        var newDeleteButton = $('<button/>').attr("id", "delete");
+        //create list element
+        $('.sortable').append(newLi);
+        //create form element and append to li
+        newLi.append(newForm);
+        //create input.checkbox and append to form
+        newForm.append(newInputCheckbox);
+        //create a append to li
+        newLi.append(newAForTitle);
+        //create span append to a
+        newAForTitle.append(newSpan.text(task.title));
+        //create br append to li
+        newLi.append('<br />');
+        //create span.notes append to li
+        newLi.append(newSpanNotes.text(task.notes));
+        //create br append to li
+        newLi.append('<br />');
+        //create a append to li
+        newLi.append(newAForEdit);
+        //create edit button append to a
+        newAForEdit.append(newEditButton.text('Edit'));
+        //create form append to li
+        newLi.append(newDeleteForm);
+        //create delete button append to form
+        newDeleteForm.append(newDeleteButton.text('Delete'));
+        console.log(newLi);
       },
       failure: function(error) {
       }

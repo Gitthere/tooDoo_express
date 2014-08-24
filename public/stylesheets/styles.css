@@ -122,7 +122,7 @@ ul {
   font-size: 30px;
 }
 
-#title {
+.title {
   font-style: arial;
   color: white;
   font: 30px bold;
@@ -130,7 +130,7 @@ ul {
 }
 
 
-#notes {
+.notes {
   font-style: arial;
   margin: 25px;
 }
@@ -151,6 +151,7 @@ ul {
   display: inline-block;
   width: 70%;
   margin-right: 5%;
+  margin-left: 2.75%;
 }
 
 
@@ -165,6 +166,7 @@ ul {
 #add_new_task {
   border-radius: 15px;
   width: 20%:;
+  padding: 8px;
 
 }
 
