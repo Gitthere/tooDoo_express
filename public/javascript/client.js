@@ -1,7 +1,7 @@
 //allows clickbox to highlight and line-through task
 $( document ).ready(function() {
 
-  $('.checkbox').click(function() {
+  $('.sortable').on('click', '.checkbox', function() {
     $(this).parent().submit()
   });
   function updateCounter() {
@@ -25,7 +25,11 @@ $( document ).ready(function() {
         console.log(task);
         var newLi = $('<li/>').addClass('li incomplete');
         var newForm = $('<form/>').addClass('submitForm id');
-        var newInputCheckbox = $('<input type="checkbox"/>').addClass('checkbox');
+        var newInputCheckbox = $('<input/>', {
+          name: 'task',
+          type: 'checkbox',
+          class: 'checkbox' 
+        })
         var newAForTitle = $('<a/>');
         var newSpan = $('<span/>').addClass('title');
         var newSpanNotes = $('<span/>').addClass('notes');
@@ -40,7 +44,7 @@ $( document ).ready(function() {
         var newDeleteButton = $('<button>', {
           type: 'submit',
           class: 'delete'
-        })
+        });
         //create list element
         $('.sortable').append(newLi);
         //create form element and append to li
