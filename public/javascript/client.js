@@ -68,6 +68,8 @@ $( document ).ready(function() {
         console.log(newLi);
 
         updateCounter();
+        //clears input box after adding new task
+        $('#newTaskForm')[0].reset();
       },
       failure: function(error) {
       }
@@ -75,7 +77,6 @@ $( document ).ready(function() {
   });
 
   $('.sortable').on('submit', '.deleteForm', function(event) {
-    alert('inside deleteForm');
     var url = $(this).attr('action');
     var thisForm = $(this);
     event.preventDefault();

@@ -181,7 +181,7 @@ ul {
   border-radius: 15px;
 }
 
-#delete {
+.delete {
   padding: 5px;
   display: inline-block;
   background-color: red;
