@@ -68,12 +68,12 @@ $( document ).ready(function() {
         console.log(newLi);
 
         updateCounter();
-        //clears input box after adding new task
-        $('#newTaskForm')[0].reset();
       },
       failure: function(error) {
       }
     });
+    //clears input box after adding new task
+    $('#newTaskForm')[0].reset();
   });
 
   $('.sortable').on('submit', '.deleteForm', function(event) {
