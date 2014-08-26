@@ -35,7 +35,7 @@ $( document ).ready(function() {
         var newSpan = $('<span/>').addClass('title');
         var newSpanNotes = $('<span/>').addClass('notes');
         var newAForEdit = $('<a/>');
-        var newEditButton = $('<button/>').attr('id', 'edit').attr('class', 'fa fa-pencil-square' );
+        var newEditButton = $('<button/>').attr('id', 'edit').attr('class', 'fa fa-2x fa-pencil-square' );
         var newDeleteForm = $('<form>', {
           action: '/tasks/' + task._id + '?_method=DELETE',
           class: 'deleteForm',
@@ -44,7 +44,8 @@ $( document ).ready(function() {
           
         var newDeleteButton = $('<button>', {
           type: 'submit',
-          class: 'delete'
+          class: 'delete',
+          class: 'fa fa-2x fa-bomb'
         });
         //create list element
         $('.sortable').append(newLi);
