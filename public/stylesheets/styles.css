@@ -1,5 +1,5 @@
 body {
-  background-color: black;
+  background-color: #EDEDED;
 }
 
 #indexLoginButton {
@@ -18,7 +18,7 @@ body {
 }
 
 #nameOfUserLoggedIn {
-  color: white;
+  color: #4D4D4D;
   font-size: 20px;
   float: right;
   margin-bottom: 5px;
@@ -97,18 +97,18 @@ body {
 
 
 label {
-  color: white;
+  color: #EDEDED;
 }
 
 
 h1 {
-  color: white;
+  color: #4D4D4D;
 }
 
 ul {
   margin-left: 30px;
   list-style-type: cjk-ideographic;
-  color: white;
+  color: #4D4D4D;
 }
 
 
@@ -118,13 +118,13 @@ ul {
 
 #taskCounter {
   /*margin-left: 25px;*/
-  color: white;
+  color: #4D4D4D;
   font-size: 30px;
 }
 
 .title {
   font-style: arial;
-  color: white;
+  color: #4D4D4D;
   font: 30px bold;
   margin-top: -20px;
 }
@@ -133,16 +133,17 @@ ul {
 .notes {
   font-style: arial;
   margin: 25px;
+  color: #4D4D4D;
 }
 
 
 #newTaskTitleAboveBox {
-  color: white;
+  color: #4D4D4D;
 }
 
 
 #newTaskNotesAboveBox {
-  color: white;
+  color: #4D4D4D;
 }
 
 
@@ -170,11 +171,21 @@ ul {
 
 }
 
+i.class.fa.fa-plus-square {
+  margin-left: 3px;
+}
+
+
 #edit {
   padding: 5px;
   display: inline-block;
   background-color: salmon;
   border-radius: 15px;
+}
+
+i.class.fa.fa-pencil-square {
+  color: white;
+  margin-left: 3px;
 }
 
 #submitEdittedTask {
@@ -187,6 +198,7 @@ ul {
   background-color: red;
   border-radius: 15px;
 }
+
 
 
 .deleteForm {

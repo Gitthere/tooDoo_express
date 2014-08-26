@@ -5,6 +5,7 @@ block content
     div.small-12.medium-6.large-6.small-centered.columns
     a(href="/logout")
       button#logout(type="submit") Logout
+        i.class.fa.fa-eject
     div.small-12.medium-6.large-6.small-centered.columns
       h1#newTaskToBeAdded New Task To Be Added 
       form#newTaskForm
@@ -13,6 +14,7 @@ block content
         p#newTaskNotesAboveBox Notes 
          input#new_task_notes(name="taskNotes" type="text") 
          button#add_new_task(type="submit") Add
+          i.class.fa.fa-plus-square
     div.small-12.medium-6.large-6.small-centered.columns
       br
       h1 TooDoo List
@@ -24,15 +26,17 @@ block content
               input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
             //-link for the title
             a(href="/tasks/#{task._id}")
-              span.title#title= task.title
+            span.title#title= task.title
             br
             span.notes#notes= task.notes
             br
             a(href="/tasks/#{task._id}/edit")
               button#edit Edit
+                i.class.fa.fa-2x.fa-pencil-square
             //- a(href="/tasks/#{task._id, }?_method=DELETE")
             //-   button Delete
             form.deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
               button.delete(type="submit") Delete
+                i.class.fa.fa-2x.fa-bomb
         
       
