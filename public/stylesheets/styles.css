@@ -207,8 +207,8 @@ i.class.fa.fa-pencil-square {
 }
 
 
-.green {
-  background-color: #f6f6f6;
+.checked {
+  background-color: black;
   text-decoration: line-through;
 }
 

@@ -63,16 +63,6 @@ $( document ).ready(function() {
         deleteButton.append(ifordeleteform);
         deleteform.append(deleteButton);
 
-
-        // var newDeleteForm = $('<form>', {
-        //   action: '/tasks/' + task._id + '?_method=DELETE',
-        //   class: 'deleteForm',
-        //   enctype: 'application/x-www-form-urlencoded'
-        // });
-        // var newDeleteButton = $('<button>', {
-        //   type: 'submit',
-        //   class: 'delete fa fa-2x fa-bomb'
-        // });
         //create list element
         $('.sortable').append(newLi);
         //create form element and append to li
@@ -92,11 +82,8 @@ $( document ).ready(function() {
         //create a append to li
         newLi.append(aElement);
         //create form append to li
-        // newLi.append(newDeleteForm);
         newLi.append(deleteform);
-        //create delete button append to form
 
-        // newDeleteForm.append(newDeleteButton.text('Delete'));
         console.log(newLi);
 
         updateCounter();
@@ -126,7 +113,7 @@ $( document ).ready(function() {
 
 });
 
-
+  //******** TO BE ADDED LATER ***********
   // //remove task when dragged outside of div
   // $( '.draggable').draggable();
   // $( '.droppable').droppable({

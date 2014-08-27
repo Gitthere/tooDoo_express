@@ -21,7 +21,7 @@ block content
       div#taskCounter Task Counter
       ul.sortable
         each task in tasksCollection
-          li.li(class= (task.checked? "green" : "incomplete"))
+          li.li(class= (task.checked? "checked" : "incomplete"))
             form.submitForm.id(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
               input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
             //-link for the title
