@@ -26,12 +26,12 @@ block content
               input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
             //-link for the title
             a(href="/tasks/#{task._id}")
-            span.title#title= task.title
+            span.title= task.title
             br
-            span.notes#notes= task.notes
+            span.notes= task.notes
             br
             a(href="/tasks/#{task._id}/edit")
-              button#edit Edit
+              button.edit Edit
                 i.class.fa.fa-2x.fa-pencil-square
             //- a(href="/tasks/#{task._id, }?_method=DELETE")
             //-   button Delete

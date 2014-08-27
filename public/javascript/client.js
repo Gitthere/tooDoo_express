@@ -24,29 +24,55 @@ $( document ).ready(function() {
       data: $('#newTaskForm').serialize(),
       success: function(task) {
         console.log(task);
-        var newLi = $('<li/>').addClass('li incomplete');
+        var newLi = $('<li>').addClass('li incomplete');
         var newForm = $('<form/>').addClass('submitForm id');
         var newInputCheckbox = $('<input/>', {
           name: 'task',
           type: 'checkbox',
           class: 'checkbox' 
         })
+
         var newAForTitle = $('<a/>');
         var newSpan = $('<span/>').addClass('title');
         var newSpanNotes = $('<span/>').addClass('notes');
-        var newAForEdit = $('<a/>');
-        var newEditButton = $('<button/>').attr('id', 'edit').attr('class', 'fa fa-2x fa-pencil-square' );
-        var newDeleteForm = $('<form>', {
-          action: '/tasks/' + task._id + '?_method=DELETE',
-          class: 'deleteForm',
-          enctype: 'application/x-www-form-urlencoded'
+
+        //add edit button
+        var aElement = $('<a>');
+        var iElement = $('<i>',{
+          class: 'fa fa-2x fa-pencil-square'
         });
-          
-        var newDeleteButton = $('<button>', {
-          type: 'submit',
-          class: 'delete',
+        var button = $('<button>', {
+          class: 'edit',
+          text: 'Edit'  
+        });
+        button.append(iElement);
+        aElement.append(button);
+
+        //add delete button
+        var deleteform = $('<form>', {
+          class: 'deleteForm'
+        });
+        var ifordeleteform = $('<i>', {
           class: 'fa fa-2x fa-bomb'
         });
+        var deleteButton = $('<button>', {
+          class: 'delete',
+          text: 'Delete',
+          type: 'submit'
+        });
+        deleteButton.append(ifordeleteform);
+        deleteform.append(deleteButton);
+
+
+        // var newDeleteForm = $('<form>', {
+        //   action: '/tasks/' + task._id + '?_method=DELETE',
+        //   class: 'deleteForm',
+        //   enctype: 'application/x-www-form-urlencoded'
+        // });
+        // var newDeleteButton = $('<button>', {
+        //   type: 'submit',
+        //   class: 'delete fa fa-2x fa-bomb'
+        // });
         //create list element
         $('.sortable').append(newLi);
         //create form element and append to li
@@ -64,13 +90,13 @@ $( document ).ready(function() {
         //create br append to li
         newLi.append('<br />');
         //create a append to li
-        newLi.append(newAForEdit);
-        //create edit button append to a
-        newAForEdit.append(newEditButton.text('Edit'));
+        newLi.append(aElement);
         //create form append to li
-        newLi.append(newDeleteForm);
+        // newLi.append(newDeleteForm);
+        newLi.append(deleteform);
         //create delete button append to form
-        newDeleteForm.append(newDeleteButton.text('Delete'));
+
+        // newDeleteForm.append(newDeleteButton.text('Delete'));
         console.log(newLi);
 
         updateCounter();
