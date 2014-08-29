@@ -3,7 +3,6 @@ $( document ).ready(function() {
 
   $('.sortable').on('click', '.checkbox', function() {
     $(this).parent().submit();
-    console.log('anhthign');
     
   });
   function updateCounter() {
@@ -25,14 +24,19 @@ $( document ).ready(function() {
       data: $('#newTaskForm').serialize(),
       success: function(task) {
         console.log(task);
-        var newLi = $('<li>').addClass('li incomplete');
+        var newLi = $('<li>').addClass('taskList incomplete ui-sortable-handle');
         var newForm = $('<form/>').addClass('submitForm id');
         var newInputCheckbox = $('<input/>', {
           name: 'task',
           type: 'checkbox',
           class: 'checkbox' 
         })
-
+        var newLabel = $('<label/>');
+        var newLabelForI = $('<i/>');
+        //***** add vars for small 5 and 6 divs then new var to parent .row to append all 3
+        var divForCheckbox = $('<div/>').addClass('small-1 columns');
+        var newDivForTaskInfo = $('<div/>').addClass('row');
+        var newDivForTitle = $('<div/>').addClass('small-5 columns titleToShowTask');
         var newAForTitle = $('<a/>');
         var newSpan = $('<span/>').addClass('title');
         var newSpanNotes = $('<span/>').addClass('notes');
@@ -67,11 +71,14 @@ $( document ).ready(function() {
         //create list element
         $('.sortable').append(newLi);
         //create form element and append to li
-        newLi.append(newForm);
+        // newLi.append(newForm);
         //create input.checkbox and append to form
         newForm.append(newInputCheckbox);
+        newForm.append(newLabel);
+        newLabel.append(newLabelForI);
         //create a append to li
-        newLi.append(newAForTitle);
+        newLi.append(newDivForTaskInfo);
+        newDivForTitle.append(newAForTitle);
         //create span append to a
         newAForTitle.append(newSpan.text(task.title));
         //create span.notes append to li
