@@ -17,26 +17,35 @@ block content
           i.class.fa.fa-plus-square
     div.small-12.medium-6.large-6.small-centered.columns
       br
-      h1 TooDoo List
-      div#taskCounter Task Counter
-      ul.sortable
-        each task in tasksCollection
-          li.li(class= (task.checked? "checked" : "incomplete"))
-            form.submitForm.id(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
-              input.checkbox(name="task", type="checkbox", checked=(task.checked? "checked" : undefined))
-            //-link for the title
-            a(href="/tasks/#{task._id}")
-            span.title= task.title
-            br
-            span.notes= task.notes
-            br
-            a(href="/tasks/#{task._id}/edit")
-              button.edit Edit
-                i.class.fa.fa-2x.fa-pencil-square
-            //- a(href="/tasks/#{task._id, }?_method=DELETE")
-            //-   button Delete
-            form.deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
-              button.delete(type="submit") Delete
-                i.class.fa.fa-2x.fa-bomb
+      div.toodoolistdiv
+      div.insidelist
+        h1.toodoolist TooDoo List
+        div#taskCounter Task Counter
+        ul.sortable
+          each task in tasksCollection
+            li.taskList(class= (task.checked? "checked" : "incomplete"))
+              .row
+                .small-1.columns
+                  form.submitForm.id(action="/tasks/completed/#{task._id}", method="POST", enctype="application/x-www-form-urlencoded")
+                    input.checkbox(id=task._id, name="task", checked=(task.checked? "checked" : undefined))
+                    label.label(for=task._id)
+                      i.class.fa.fa-2x.fa-check-square-o
+                .small-5.columns.titleToShowTask
+                  //-link for the title
+                  a(href="/tasks/#{task._id}")
+                    span.title= task.title
+                    //- span.notes= task.notes
+                .small-6.columns
+                  a(href="/tasks/#{task._id}/edit")
+                    button.edit Edit
+                      i.class.fa.fa-2x.fa-pencil-square
+                  //- a(href="/tasks/#{task._id, }?_method=DELETE")
+                  //-   button Delete
+                  form.deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
+                    button.delete(type="submit") Delete
+                      i.class.fa.fa-2x.fa-bomb
+              .row.hiddenNote
+                .small-5.columns.small-offset-1
+                  span.notes= task.notes
         
       
