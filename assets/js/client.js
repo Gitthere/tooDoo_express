@@ -32,7 +32,8 @@ $( document ).ready(function() {
         var divForCheckbox = $('<div/>').addClass('small-1 columns');
         var newFormForCheckbox = $('<form/>', {
           class: 'submitForm id',
-          action: '/tasks/completed/#{task._id}',
+          //find out why action not able to get actual id
+          action: '/tasks/completed/{task._id}',
           method: 'POST',
           enctype: 'application/x-www-form-urlencoded'
         });
@@ -50,14 +51,15 @@ $( document ).ready(function() {
           href: task._id
         });
         var newSpan = $('<span/>').addClass('title');
-        var newSpanNotes = $('<span/>').addClass('notes');
 
         //hidden row for note
-        var newHiddenNote = $('<div/>').addClass('row hiddenNote');
+        var newHiddenNote = $('<div/>', {
+          class: 'row hiddenNote',
+          style: 'display: none'
+        });
         var newHiddenNoteColumn = $('<div/>').addClass('small-5 columns small-offset-1');
-//***********
-//  add span for hidden note
-//*******
+        var newSpanNotes = $('<span/>').addClass('notes');
+        
         var newDivForEditDelete = $('<div/>').addClass('small-6 columns');
         //add edit button to div
         var aElement = $('<a>', {
@@ -108,15 +110,18 @@ $( document ).ready(function() {
         newDivForTitle.append(newAForTitle);
         //create span append to a
         newAForTitle.append(newSpan.text(task.title));
+        newHiddenNoteColumn.append(newSpanNotes.text(task.notes));
+        newHiddenNote.append(newHiddenNoteColumn);
+        newLi.append(newHiddenNote);
         //create span.notes append to li
-        newLi.append(newSpanNotes.text(task.notes));
+        // newLi.append(newSpanNotes.text(task.notes));
         //append edit and delete buttons to div
         // newDivForEditDelete.append(aElement);
         // newDivForEditDelete.append(deleteform);
         // //create a append to li
-        newLi.append(aElement);
+        newDivForTaskInfo.append(aElement);
         //create form append to li
-        newLi.append(deleteform);
+        newDivForTaskInfo.append(deleteform);
 
         console.log(newLi);
 
