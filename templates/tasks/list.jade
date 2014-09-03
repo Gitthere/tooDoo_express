@@ -36,14 +36,15 @@ block content
                     span.title= task.title
                     //- span.notes= task.notes
                 .small-6.columns
-                  a(href="/tasks/#{task._id}/edit")
-                    button.edit Edit
-                      i.class.fa.fa-2x.fa-pencil-square
-                  //- a(href="/tasks/#{task._id, }?_method=DELETE")
-                  //-   button Delete
-                  form.deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
-                    button.delete(type="submit") Delete
-                      i.class.fa.fa-2x.fa-bomb
+                //- a is now child of row, not .small-6 to algin 
+                a(href="/tasks/#{task._id}/edit")
+                  button.edit Edit
+                    i.class.fa.fa-2x.fa-pencil-square
+                //- a(href="/tasks/#{task._id, }?_method=DELETE")
+                //-   button Delete
+                form.deleteForm(action="/tasks/#{task._id}?_method=DELETE", method="POST", enctype="application/x-www-form-urlencoded")
+                  button.delete(type="submit") Delete                                        
+                    i.class.fa.fa-2x.fa-bomb
               .row.hiddenNote
                 .small-5.columns.small-offset-1
                   span.notes= task.notes

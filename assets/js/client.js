@@ -26,23 +26,44 @@ $( document ).ready(function() {
         console.log(task);
         var newLi = $('<li>').addClass('taskList incomplete ui-sortable-handle');
         var newForm = $('<form/>').addClass('submitForm id');
+
+        //***** add vars for small 5 and 6 divs then new var to parent .row to append all 3
+        var newDivForTaskInfo = $('<div/>').addClass('row');
+        var divForCheckbox = $('<div/>').addClass('small-1 columns');
+        var newFormForCheckbox = $('<form/>', {
+          class: 'submitForm id',
+          action: '/tasks/completed/#{task._id}',
+          method: 'POST',
+          enctype: 'application/x-www-form-urlencoded'
+        });
         var newInputCheckbox = $('<input/>', {
           name: 'task',
+          id: task._id,
           type: 'checkbox',
           class: 'checkbox' 
-        })
-        var newLabel = $('<label/>');
-        var newLabelForI = $('<i/>');
-        //***** add vars for small 5 and 6 divs then new var to parent .row to append all 3
-        var divForCheckbox = $('<div/>').addClass('small-1 columns');
-        var newDivForTaskInfo = $('<div/>').addClass('row');
+        });
+        var newLabel = $('<label/>').addClass('label');
+        var newLabelForICheckbox = $('<i/>').addClass('fa fa-2x fa-check-square-o');
         var newDivForTitle = $('<div/>').addClass('small-5 columns titleToShowTask');
-        var newAForTitle = $('<a/>');
+        var newAForTitle = $('<a/>', {
+          // why /tasks/task._id not able to work?
+          href: task._id
+        });
         var newSpan = $('<span/>').addClass('title');
         var newSpanNotes = $('<span/>').addClass('notes');
 
-        //add edit button
-        var aElement = $('<a>');
+        //hidden row for note
+        var newHiddenNote = $('<div/>').addClass('row hiddenNote');
+        var newHiddenNoteColumn = $('<div/>').addClass('small-5 columns small-offset-1');
+//***********
+//  add span for hidden note
+//*******
+        var newDivForEditDelete = $('<div/>').addClass('small-6 columns');
+        //add edit button to div
+        var aElement = $('<a>', {
+          // why /tasks/#{task._id}/edit not able to work?
+          href: task._id
+        });
         var iElement = $('<i>',{
           class: 'fa fa-2x fa-pencil-square'
         });
@@ -55,7 +76,10 @@ $( document ).ready(function() {
 
         //add delete button
         var deleteform = $('<form>', {
-          class: 'deleteForm'
+          class: 'deleteForm',
+          action: '/tasks/#{task._id}?_method=DELETE',
+          method: 'POST',
+          enctype: 'application/x-www-form-urlencoded'
         });
         var ifordeleteform = $('<i>', {
           class: 'fa fa-2x fa-bomb'
@@ -74,16 +98,22 @@ $( document ).ready(function() {
         // newLi.append(newForm);
         //create input.checkbox and append to form
         newForm.append(newInputCheckbox);
-        newForm.append(newLabel);
-        newLabel.append(newLabelForI);
+        newFormForCheckbox.append(newLabel);
+        newLabel.append(newLabelForICheckbox);
         //create a append to li
+        newFormForCheckbox.append(newInputCheckbox);
+        newDivForTaskInfo.append(divForCheckbox).append(newDivForTitle).append(newDivForEditDelete);
         newLi.append(newDivForTaskInfo);
+        divForCheckbox.append(newFormForCheckbox);
         newDivForTitle.append(newAForTitle);
         //create span append to a
         newAForTitle.append(newSpan.text(task.title));
         //create span.notes append to li
         newLi.append(newSpanNotes.text(task.notes));
-        //create a append to li
+        //append edit and delete buttons to div
+        // newDivForEditDelete.append(aElement);
+        // newDivForEditDelete.append(deleteform);
+        // //create a append to li
         newLi.append(aElement);
         //create form append to li
         newLi.append(deleteform);
