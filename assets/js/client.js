@@ -25,30 +25,28 @@ $( document ).ready(function() {
       success: function(task) {
         console.log(task);
         var newLi = $('<li>').addClass('taskList incomplete ui-sortable-handle');
-        var newForm = $('<form/>').addClass('submitForm id');
 
-        //***** add vars for small 5 and 6 divs then new var to parent .row to append all 3
         var newDivForTaskInfo = $('<div/>').addClass('row');
         var divForCheckbox = $('<div/>').addClass('small-1 columns');
         var newFormForCheckbox = $('<form/>', {
           class: 'submitForm id',
-          //find out why action not able to get actual id
           action: '/tasks/completed/' + task._id,
           method: 'POST',
           enctype: 'application/x-www-form-urlencoded'
         });
         var newInputCheckbox = $('<input/>', {
-          name: 'task',
           id: task._id,
-          type: 'checkbox',
+          name: 'task',
           class: 'checkbox' 
         });
-        var newLabel = $('<label/>').addClass('label');
-        var newLabelForICheckbox = $('<i/>').addClass('fa fa-2x fa-check-square-o');
+        var newLabel = $('<label/>', {
+          for: task._id,
+          class: 'label'
+        });
+        var newLabelForICheckbox = $('<i/>').addClass('class fa fa-2x fa-check-square-o');
         var newDivForTitle = $('<div/>').addClass('small-5 columns titleToShowTask');
         var newAForTitle = $('<a/>', {
-          // why /tasks/task._id not able to work?
-          href: task._id
+          href: '/tasks/' + task._id
         });
         var newSpan = $('<span/>').addClass('title');
 
@@ -63,7 +61,6 @@ $( document ).ready(function() {
         var newDivForEditDelete = $('<div/>').addClass('small-6 columns');
         //add edit button to div
         var aElement = $('<a>', {
-          // why /tasks/#{task._id}/edit not able to work?
           href: '/tasks/' + task._id + '/edit'
         });
         var iElement = $('<i>',{
@@ -96,31 +93,19 @@ $( document ).ready(function() {
 
         //create list element
         $('.sortable').append(newLi);
-        //create form element and append to li
-        // newLi.append(newForm);
-        //create input.checkbox and append to form
-        newForm.append(newInputCheckbox);
+        
+        newFormForCheckbox.append(newInputCheckbox);
         newFormForCheckbox.append(newLabel);
         newLabel.append(newLabelForICheckbox);
-        //create a append to li
-        newFormForCheckbox.append(newInputCheckbox);
         newDivForTaskInfo.append(divForCheckbox).append(newDivForTitle).append(newDivForEditDelete);
         newLi.append(newDivForTaskInfo);
         divForCheckbox.append(newFormForCheckbox);
         newDivForTitle.append(newAForTitle);
-        //create span append to a
         newAForTitle.append(newSpan.text(task.title));
         newHiddenNoteColumn.append(newSpanNotes.text(task.notes));
         newHiddenNote.append(newHiddenNoteColumn);
         newLi.append(newHiddenNote);
-        //create span.notes append to li
-        // newLi.append(newSpanNotes.text(task.notes));
-        //append edit and delete buttons to div
-        // newDivForEditDelete.append(aElement);
-        // newDivForEditDelete.append(deleteform);
-        // //create a append to li
         newDivForTaskInfo.append(aElement);
-        //create form append to li
         newDivForTaskInfo.append(deleteform);
 
         console.log(newLi);
