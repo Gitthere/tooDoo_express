@@ -33,7 +33,7 @@ $( document ).ready(function() {
         var newFormForCheckbox = $('<form/>', {
           class: 'submitForm id',
           //find out why action not able to get actual id
-          action: '/tasks/completed/{task._id}',
+          action: '/tasks/completed/' + task._id,
           method: 'POST',
           enctype: 'application/x-www-form-urlencoded'
         });
@@ -64,7 +64,7 @@ $( document ).ready(function() {
         //add edit button to div
         var aElement = $('<a>', {
           // why /tasks/#{task._id}/edit not able to work?
-          href: task._id
+          href: '/tasks/' + task._id + '/edit'
         });
         var iElement = $('<i>',{
           class: 'fa fa-2x fa-pencil-square'
@@ -79,7 +79,7 @@ $( document ).ready(function() {
         //add delete button
         var deleteform = $('<form>', {
           class: 'deleteForm',
-          action: '/tasks/#{task._id}?_method=DELETE',
+          action: '/tasks/' + task._id + '?_method=DELETE',
           method: 'POST',
           enctype: 'application/x-www-form-urlencoded'
         });
@@ -150,7 +150,7 @@ $( document ).ready(function() {
     });
   });
 
-  $('.titleToShowTask').on('click', function(event) {
+  $('.sortable').on('click', '.titleToShowTask', function(event) {
     event.preventDefault();
     $(this).parent('.row').siblings('.hiddenNote').slideToggle();
   });
